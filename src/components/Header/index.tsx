@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRightToBracket,
@@ -11,13 +12,20 @@ const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
   return (
     <div className="navbar container mx-auto px-4 pt-5">
       <div className="navbar-start">
-        <span className="self-center text-2xl font-semibold whitespace-nowrap hover:text-blue-500 transition-colors">
+        <Image
+          src="/icon.png"
+          alt="DaCoolBot Logo"
+          width={50}
+          height={50}
+          className="rounded-full mr-4"
+        />
+        <span className="self-center text-2xl font-semibold whitespace-nowrap hover:text-blue-500 transition-colors hidden lg:block">
           DCB Portal
         </span>
       </div>
       <div className="navbar-end space-x-4">
         {!session?.user ? (
-          <button onClick={() => signIn()}>
+          <button title="Sign in" onClick={() => signIn()}>
             <span className="grid gap-1 grid-flow-col items-center self-center text-xl font-medium whitespace-nowrap hover:text-blue-500 transition-colors">
               <FontAwesomeIcon icon={faRightToBracket} className="h-6 w-6" />
               {" Login"}
@@ -34,7 +42,7 @@ const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
             <span className="self-center text-xl font-medium whitespace-nowrap">
               {session.user.name}
             </span>
-            <button onClick={() => signOut()}>
+            <button title="Sign Out" onClick={() => signOut()}>
               <span className="grid gap-1 grid-flow-col items-center self-center text-xl font-medium whitespace-nowrap hover:text-blue-500 transition-colors">
                 <FontAwesomeIcon
                   icon={faRightFromBracket}

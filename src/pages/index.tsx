@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Header from "@/components/Header";
-import Filter from "@/components/Filter";
+import Session from "@/components/Session";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -17,8 +18,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col h-screen items-center">
+        <Toaster />
         <Header setTheme={setTheme} />
-        <Filter theme={theme} />
+        <Session theme={theme} />
       </main>
     </>
   );
