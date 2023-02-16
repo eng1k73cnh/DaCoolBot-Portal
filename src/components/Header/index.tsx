@@ -14,7 +14,7 @@ import ThemeChanger from "../ThemeChanger";
 const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
   const { data: session } = useSession();
   return (
-    <div className="navbar container mx-auto px-4 pt-5">
+    <header className="navbar container mx-auto px-4 pt-5">
       <div className="navbar-start">
         <Image
           src="/icon.png"
@@ -63,7 +63,7 @@ const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
         )}
         <ThemeChanger setAppTheme={props.setTheme} />
       </div>
-    </div>
+    </header>
   );
 };
 

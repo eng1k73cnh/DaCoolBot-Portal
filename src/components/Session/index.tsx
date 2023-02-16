@@ -59,7 +59,7 @@ const Session = (props: { theme: "dark" | "light" }) => {
   };
 
   return (
-    <div className="hero">
+    <div className="hero md:min-h-[80vh] min-h-[75vh]">
       <div className="hero-content flex-col lg:flex-row">
         <Filter
           currentChannel={currentChannel}

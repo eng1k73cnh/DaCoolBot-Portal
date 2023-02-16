@@ -54,7 +54,7 @@ const Filter = (props: {
         type="Channel"
         items={channels.map((channel) => {
           if (channel.type === ChannelType.GuildText) {
-            return { key: channel.id, value: channel.name };
+            return { key: channel.id, value: "#-" + channel.name };
           }
         })}
         callback={(channel: string) => {
@@ -90,7 +90,7 @@ const Filter = (props: {
       )}
       {props.currentMessage && (
         <button className="btn btn-primary mt-4" onClick={props.callback}>
-          <span>Edit message</span>
+          <span>Post message</span>
         </button>
       )}
     </div>

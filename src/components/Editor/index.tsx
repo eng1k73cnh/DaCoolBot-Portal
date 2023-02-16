@@ -43,9 +43,9 @@ const Editor = (props: {
   if (!loaded) return <LoadingIcon />;
 
   return (
-    <div className="flex flex-col pt-4 items-center place-content-center justify-center lg:min-w-[50vw] min-w-[75vw] lg:min-h-[50vh] min-h-[75vh] lg:p-10">
+    <div className="flex flex-col pt-4 items-center place-content-center justify-center lg:min-w-[50vw] min-w-[75vw] lg:min-h-[50vh] min-h-[70vh] lg:p-10">
       <MDEditor
-        className="lg:min-w-[50vw] min-w-[80vw] min-h-[75vh]"
+        className="lg:min-w-[50vw] min-w-[75vw] lg:min-h-[70vh] min-h-[75vh]"
         language="markdown"
         value={value}
         onChange={setEditorValue}
