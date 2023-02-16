@@ -1,3 +1,7 @@
+// @ts-nocheck
+// Type is extended from jwt callback
+// https://next-auth.js.org/configuration/callbacks#jwt-callback
+
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession, signIn, signOut } from "next-auth/react";
 import ThemeChanger from "../ThemeChanger";
+import { toast } from "react-hot-toast";
 
 const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
   const { data: session } = useSession();
@@ -25,7 +30,7 @@ const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
       </div>
       <div className="navbar-end space-x-4">
         {!session?.user ? (
-          <button title="Sign in" onClick={() => signIn()}>
+          <button title="Sign in" onClick={() => signIn("discord")}>
             <span className="grid gap-1 grid-flow-col items-center self-center text-xl font-medium whitespace-nowrap hover:text-blue-500 transition-colors">
               <FontAwesomeIcon icon={faRightToBracket} className="h-6 w-6" />
               {" Login"}
@@ -39,9 +44,14 @@ const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
               alt="User Image"
               className="rounded-full h-10 w-10"
             />
-            <span className="self-center text-xl font-medium whitespace-nowrap">
-              {session.user.name}
-            </span>
+            <div>
+              <span className="self-center text-xl font-medium whitespace-nowrap">
+                {session.user.name}
+              </span>
+              <span className="self-center text-base font-light whitespace-nowrap">
+                #{session.user.discriminator}
+              </span>
+            </div>
             <button title="Sign Out" onClick={() => signOut()}>
               <span className="grid gap-1 grid-flow-col items-center self-center text-xl font-medium whitespace-nowrap hover:text-blue-500 transition-colors">
                 <FontAwesomeIcon
