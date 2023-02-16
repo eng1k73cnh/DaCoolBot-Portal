@@ -34,16 +34,26 @@ const Session = (props: { theme: "dark" | "light" }) => {
   }
 
   const postMessage = () => {
-    toast("Editing message...");
-    editMessage(currentChannel, currentMsg, editorValue || "").then((data) => {
-      console.log(data);
-      toast.success("Message edited successfully!");
-    });
+    if (currentMsg === "new") {
+      toast("Sending message...");
+      sendMessage(currentChannel, editorValue || "").then((data) => {
+        console.log(data);
+        toast.success("Message sent successfully!");
+      });
+    } else {
+      toast("Editing message...");
+      editMessage(currentChannel, currentMsg, editorValue || "").then(
+        (data) => {
+          console.log(data);
+          toast.success("Message edited successfully!");
+        }
+      );
+    }
 
     if (pingContent) {
       sendMessage(currentChannel, pingContent).then((data) => {
         console.log(data);
-        toast.success("Message sent successfully!");
+        toast.success("Ping sent successfully!");
       });
     }
   };

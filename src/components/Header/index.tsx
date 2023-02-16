@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession, signIn, signOut } from "next-auth/react";
 import ThemeChanger from "../ThemeChanger";
-import { toast } from "react-hot-toast";
 
 const Header = (props: { setTheme: (theme: "dark" | "light") => void }) => {
   const { data: session } = useSession();

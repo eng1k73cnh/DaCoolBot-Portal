@@ -17,6 +17,14 @@ const Editor = (props: {
   };
 
   useEffect(() => {
+    if (!props.channelId || !props.messageId) return;
+
+    if (props.messageId === "new") {
+      setValue("");
+      setLoaded(true);
+      return;
+    }
+
     setLoaded(false);
     fetch(`/api/message/fetch`, {
       method: "POST",

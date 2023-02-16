@@ -14,6 +14,9 @@ const Dropdown = (props: {
         onChange={(e) => props.callback(e.target.value)}
       >
         <option value="">Select a {props.type.toLowerCase()}</option>
+        {props.type === "Message" && (
+          <option value="new">Create a new {props.type.toLowerCase()}</option>
+        )}
         <optgroup label={props.type + "s"}>
           {props.items.map((item) => {
             if (item) {
