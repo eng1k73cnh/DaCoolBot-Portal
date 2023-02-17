@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MDEditor from "@monaco-editor/react";
 import LoadingIcon from "../LoadingIcon";
+import toast from "react-hot-toast";
 
 const Editor = (props: {
   channelId: string;
@@ -33,9 +34,17 @@ const Editor = (props: {
         messageId: props.messageId,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) return res.json();
+        return Promise.reject(res);
+      })
       .then((data) => {
         setValue(data.content);
+        setLoaded(true);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Failed to fetch message content");
         setLoaded(true);
       });
   }, [props.channelId, props.messageId]);

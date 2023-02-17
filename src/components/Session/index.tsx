@@ -36,25 +36,38 @@ const Session = (props: { theme: "dark" | "light" }) => {
   const postMessage = () => {
     if (currentMsg === "new") {
       toast("Sending message...");
-      sendMessage(currentChannel, editorValue || "").then((data) => {
-        console.log(data);
-        toast.success("Message sent successfully!");
-      });
+      sendMessage(currentChannel, editorValue || "")
+        .then((data) => {
+          console.log(data);
+          toast.success("Message sent successfully!");
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Failed to send message");
+        });
     } else {
       toast("Editing message...");
-      editMessage(currentChannel, currentMsg, editorValue || "").then(
-        (data) => {
+      editMessage(currentChannel, currentMsg, editorValue || "")
+        .then((data) => {
           console.log(data);
           toast.success("Message edited successfully!");
-        }
-      );
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Failed to edit message");
+        });
     }
 
     if (pingContent) {
-      sendMessage(currentChannel, pingContent).then((data) => {
-        console.log(data);
-        toast.success("Ping sent successfully!");
-      });
+      sendMessage(currentChannel, pingContent)
+        .then((data) => {
+          console.log(data);
+          toast.success("Ping sent successfully!");
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Failed to send ping");
+        });
     }
   };
 

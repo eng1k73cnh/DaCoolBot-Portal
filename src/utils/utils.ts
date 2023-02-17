@@ -13,7 +13,10 @@ export const editMessage = (
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.ok) return res.json();
+    return Promise.reject(res);
+  });
 
 export const sendMessage = (channelId: string, content: string) =>
   fetch(`/api/message/send`, {
@@ -25,4 +28,7 @@ export const sendMessage = (channelId: string, content: string) =>
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.ok) return res.json();
+    return Promise.reject(res);
+  });

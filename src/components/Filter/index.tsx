@@ -6,6 +6,7 @@ import {
   RESTGetAPIGuildChannelsResult,
 } from "discord-api-types/v10";
 import Dropdown from "../Dropdown";
+import toast from "react-hot-toast";
 
 const Filter = (props: {
   currentChannel: string;
@@ -27,9 +28,16 @@ const Filter = (props: {
     if (status === "loading" || !user) return;
 
     fetch("/api/channel/list")
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) return res.json();
+        else return Promise.reject(res);
+      })
       .then((data) => {
         setChannels(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Failed to fetch message list");
       });
   }, [status, user]);
 
@@ -42,9 +50,16 @@ const Filter = (props: {
         channelId: props.currentChannel,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) return res.json();
+        return Promise.reject(res);
+      })
       .then((data) => {
         setMsgList(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Failed to fetch message list");
       });
   }, [status, user, props.currentChannel]);
 
