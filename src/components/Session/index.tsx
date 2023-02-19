@@ -113,7 +113,7 @@ const Session = (props: { theme: "dark" | "light" }) => {
   };
 
   return (
-    <div className="hero min-h-[75vh]">
+    <div className="hero">
       <div className="hero-content flex-col lg:flex-row">
         <Filter
           state={filterState}

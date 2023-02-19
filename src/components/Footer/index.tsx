@@ -3,7 +3,7 @@ import { faCodeCommit } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   return (
-    <footer className="hidden md:flex navbar container p-4 mx-auto md:p-6 flex-row-reverse">
+    <footer className="flex navbar container p-4 mx-auto md:p-6 flex-row-reverse">
       <FontAwesomeIcon icon={faCodeCommit} className="ml-1 h-4 w-4" />
       <code>
         <a
