@@ -27,18 +27,15 @@ const Editor = (props: {
     }
 
     setLoaded(false);
-    fetch(`/api/message/fetch`, {
-      method: "POST",
-      body: JSON.stringify({
-        channelId: props.channelId,
-        messageId: props.messageId,
-      }),
-    })
+    fetch(
+      `/api/message/fetch?channelId=${props.channelId}&messageId=${props.messageId}`
+    )
       .then((res) => {
         if (res.ok) return res.json();
         return Promise.reject(res);
       })
       .then((data) => {
+        props.callback(data.content);
         setValue(data.content);
         setLoaded(true);
       })

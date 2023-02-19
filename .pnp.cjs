@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fortawesome/free-solid-svg-icons", "npm:6.3.0"],\
             ["@fortawesome/react-fontawesome", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:0.2.0"],\
             ["@monaco-editor/react", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:4.4.6"],\
-            ["@next/font", "npm:13.1.6"],\
+            ["@types/formidable", "npm:2.0.5"],\
             ["@types/node", "npm:18.13.0"],\
             ["@types/react", "npm:18.0.27"],\
             ["@types/react-dom", "npm:18.0.10"],\
@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["discord-api-types", "npm:0.37.33"],\
             ["eslint", "npm:8.33.0"],\
             ["eslint-config-next", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:13.1.6"],\
+            ["formidable", "npm:2.1.2"],\
             ["next", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:13.1.6"],\
             ["next-auth", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:4.19.2"],\
             ["postcss", "npm:8.4.21"],\
@@ -297,15 +298,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@next/font", [\
-        ["npm:13.1.6", {\
-          "packageLocation": "./.yarn/cache/@next-font-npm-13.1.6-8de77ea8e0-06499c9361.zip/node_modules/@next/font/",\
-          "packageDependencies": [\
-            ["@next/font", "npm:13.1.6"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@next/swc-android-arm-eabi", [\
         ["npm:13.1.6", {\
           "packageLocation": "./.yarn/unplugged/@next-swc-android-arm-eabi-npm-13.1.6-bd7d38d6d2/node_modules/@next/swc-android-arm-eabi/",\
@@ -555,6 +547,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/formidable", [\
+        ["npm:2.0.5", {\
+          "packageLocation": "./.yarn/cache/@types-formidable-npm-2.0.5-2c70f897be-2de9a08a53.zip/node_modules/@types/formidable/",\
+          "packageDependencies": [\
+            ["@types/formidable", "npm:2.0.5"],\
+            ["@types/node", "npm:18.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/json5", [\
         ["npm:0.0.29", {\
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",\
@@ -569,6 +571,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-18.13.0-00f732af8e-4ea10f8802.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:18.13.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:18.14.0", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-18.14.0-ddc1a221d2-d83fcf5e4e.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:18.14.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -954,6 +963,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["es-abstract", "npm:1.21.1"],\
             ["es-shim-unscopables", "npm:1.0.0"],\
             ["get-intrinsic", "npm:1.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["asap", [\
+        ["npm:2.0.6", {\
+          "packageLocation": "./.yarn/cache/asap-npm-2.0.6-36714d439d-b296c92c4b.zip/node_modules/asap/",\
+          "packageDependencies": [\
+            ["asap", "npm:2.0.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1381,7 +1399,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fortawesome/free-solid-svg-icons", "npm:6.3.0"],\
             ["@fortawesome/react-fontawesome", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:0.2.0"],\
             ["@monaco-editor/react", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:4.4.6"],\
-            ["@next/font", "npm:13.1.6"],\
+            ["@types/formidable", "npm:2.0.5"],\
             ["@types/node", "npm:18.13.0"],\
             ["@types/react", "npm:18.0.27"],\
             ["@types/react-dom", "npm:18.0.10"],\
@@ -1390,6 +1408,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["discord-api-types", "npm:0.37.33"],\
             ["eslint", "npm:8.33.0"],\
             ["eslint-config-next", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:13.1.6"],\
+            ["formidable", "npm:2.1.2"],\
             ["next", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:13.1.6"],\
             ["next-auth", "virtual:a504af4938aaa4e2c08531de1d267d9e3b720649f6347c0bb0a1b9118194b1e9ac5cbd97e98435749cb91d038884571c017a0473fb58212e7694c6955b7f78d7#npm:4.19.2"],\
             ["postcss", "npm:8.4.21"],\
@@ -1536,6 +1555,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["acorn-node", "npm:1.8.2"],\
             ["defined", "npm:1.0.1"],\
             ["minimist", "npm:1.2.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dezalgo", [\
+        ["npm:1.0.4", {\
+          "packageLocation": "./.yarn/cache/dezalgo-npm-1.0.4-ae3b673c98-895389c6ae.zip/node_modules/dezalgo/",\
+          "packageDependencies": [\
+            ["dezalgo", "npm:1.0.4"],\
+            ["asap", "npm:2.0.6"],\
+            ["wrappy", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2309,6 +2339,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["formidable", [\
+        ["npm:2.1.2", {\
+          "packageLocation": "./.yarn/cache/formidable-npm-2.1.2-40ba18d67f-81c8e5d89f.zip/node_modules/formidable/",\
+          "packageDependencies": [\
+            ["formidable", "npm:2.1.2"],\
+            ["dezalgo", "npm:1.0.4"],\
+            ["hexoid", "npm:1.0.0"],\
+            ["once", "npm:1.4.0"],\
+            ["qs", "npm:6.11.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["fraction.js", [\
         ["npm:4.2.0", {\
           "packageLocation": "./.yarn/cache/fraction.js-npm-4.2.0-28efe4afc7-8c76a6e21d.zip/node_modules/fraction.js/",\
@@ -2671,6 +2714,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/has-unicode-npm-2.0.1-893adb4747-1eab07a743.zip/node_modules/has-unicode/",\
           "packageDependencies": [\
             ["has-unicode", "npm:2.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["hexoid", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/hexoid-npm-1.0.0-2274609209-27a148ca76.zip/node_modules/hexoid/",\
+          "packageDependencies": [\
+            ["hexoid", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4208,6 +4260,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/punycode-npm-2.3.0-df4bdce06b-39f760e09a.zip/node_modules/punycode/",\
           "packageDependencies": [\
             ["punycode", "npm:2.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["qs", [\
+        ["npm:6.11.0", {\
+          "packageLocation": "./.yarn/cache/qs-npm-6.11.0-caf1bc9dea-6e1f29dd53.zip/node_modules/qs/",\
+          "packageDependencies": [\
+            ["qs", "npm:6.11.0"],\
+            ["side-channel", "npm:1.0.4"]\
           ],\
           "linkType": "HARD"\
         }]\

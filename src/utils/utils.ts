@@ -1,33 +1,20 @@
 export const editMessage = (
+  body: FormData,
   channelId: string,
-  messageId: string,
-  content: string
+  messageId: string
 ) =>
-  fetch(`/api/message/edit`, {
+  fetch(`/api/message/edit?channelId=${channelId}&messageId=${messageId}`, {
     method: "POST",
-    body: JSON.stringify({
-      channelId,
-      messageId,
-      content,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
+    body,
   }).then((res) => {
     if (res.ok) return res.json();
     return Promise.reject(res);
   });
 
-export const sendMessage = (channelId: string, content: string) =>
-  fetch(`/api/message/send`, {
+export const sendMessage = (body: FormData, channelId: string) =>
+  fetch(`/api/message/send?channelId=${channelId}`, {
     method: "POST",
-    body: JSON.stringify({
-      channelId,
-      content,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
+    body,
   }).then((res) => {
     if (res.ok) return res.json();
     return Promise.reject(res);

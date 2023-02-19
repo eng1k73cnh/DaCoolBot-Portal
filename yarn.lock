@@ -180,13 +180,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/font@npm:13.1.6":
-  version: 13.1.6
-  resolution: "@next/font@npm:13.1.6"
-  checksum: 06499c9361d8ecf1bca47f20dfb226b6e9f77668afe967809cd8a4eade1b8620f9d723032098b2a0a9df2d2e2df96ad17e8128fcb7f494c99951ee8a61027966
-  languageName: node
-  linkType: hard
-
 "@next/swc-android-arm-eabi@npm:13.1.6":
   version: 13.1.6
   resolution: "@next/swc-android-arm-eabi@npm:13.1.6"
@@ -390,10 +383,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/formidable@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@types/formidable@npm:2.0.5"
+  dependencies:
+    "@types/node": "*"
+  checksum: 2de9a08a539309229f0d15074dc9587b7e1316f29da1092ef2eb1e7c9f10ce4b02f1a0b7da5fe21391a5946c9fe5d2be7bfabd5bc6b93005acda22bcc424a456
+  languageName: node
+  linkType: hard
+
 "@types/json5@npm:^0.0.29":
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:*":
+  version: 18.14.0
+  resolution: "@types/node@npm:18.14.0"
+  checksum: d83fcf5e4ed544755dd9028f5cbb6b9d46235043159111bb2ad62223729aee581c0144a9f6df8ba73d74011db9ed4ebd7af2fd5e0996714e3beb508a5da8ac5c
   languageName: node
   linkType: hard
 
@@ -714,6 +723,13 @@ __metadata:
     es-shim-unscopables: ^1.0.0
     get-intrinsic: ^1.1.3
   checksum: 7923324a67e70a2fc0a6e40237405d92395e45ebd76f5cb89c2a5cf1e66b47aca6baacd0cd628ffd88830b90d47fff268071493d09c9ae123645613dac2c2ca3
+  languageName: node
+  linkType: hard
+
+"asap@npm:^2.0.0":
+  version: 2.0.6
+  resolution: "asap@npm:2.0.6"
+  checksum: b296c92c4b969e973260e47523207cd5769abd27c245a68c26dc7a0fe8053c55bb04360237cb51cab1df52be939da77150ace99ad331fb7fb13b3423ed73ff3d
   languageName: node
   linkType: hard
 
@@ -1072,7 +1088,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.3.0
     "@fortawesome/react-fontawesome": ^0.2.0
     "@monaco-editor/react": ^4.4.6
-    "@next/font": 13.1.6
+    "@types/formidable": ^2.0.5
     "@types/node": 18.13.0
     "@types/react": 18.0.27
     "@types/react-dom": 18.0.10
@@ -1081,6 +1097,7 @@ __metadata:
     discord-api-types: ^0.37.33
     eslint: 8.33.0
     eslint-config-next: 13.1.6
+    formidable: ^2.1.1
     next: 13.1.6
     next-auth: ^4.19.2
     postcss: ^8.4.21
@@ -1193,6 +1210,16 @@ __metadata:
   bin:
     detective: bin/detective.js
   checksum: dc4601bbc6be850edb3c2dab7a0eaf5a6169a15ad201679c66d40ea1986df816eeaecd590047f15b0780285f3eeea13b82dca0d4c52a47e744a571e326a72dc9
+  languageName: node
+  linkType: hard
+
+"dezalgo@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "dezalgo@npm:1.0.4"
+  dependencies:
+    asap: ^2.0.0
+    wrappy: 1
+  checksum: 895389c6aead740d2ab5da4d3466d20fa30f738010a4d3f4dcccc9fc645ca31c9d10b7e1804ae489b1eb02c7986f9f1f34ba132d409b043082a86d9a4e745624
   languageName: node
   linkType: hard
 
@@ -1792,6 +1819,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"formidable@npm:^2.1.1":
+  version: 2.1.2
+  resolution: "formidable@npm:2.1.2"
+  dependencies:
+    dezalgo: ^1.0.4
+    hexoid: ^1.0.0
+    once: ^1.4.0
+    qs: ^6.11.0
+  checksum: 81c8e5d89f5eb873e992893468f0de22c01678ca3d315db62be0560f9de1c77d4faefc9b1f4575098eb2263b3c81ba1024833a9fc3206297ddbac88a4f69b7a8
+  languageName: node
+  linkType: hard
+
 "fraction.js@npm:^4.2.0":
   version: 4.2.0
   resolution: "fraction.js@npm:4.2.0"
@@ -2113,6 +2152,13 @@ __metadata:
   dependencies:
     function-bind: ^1.1.1
   checksum: b9ad53d53be4af90ce5d1c38331e712522417d017d5ef1ebd0507e07c2fbad8686fffb8e12ddecd4c39ca9b9b47431afbb975b8abf7f3c3b82c98e9aad052792
+  languageName: node
+  linkType: hard
+
+"hexoid@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "hexoid@npm:1.0.0"
+  checksum: 27a148ca76a2358287f40445870116baaff4a0ed0acc99900bf167f0f708ffd82e044ff55e9949c71963852b580fc024146d3ac6d5d76b508b78d927fa48ae2d
   languageName: node
   linkType: hard
 
@@ -3108,7 +3154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"once@npm:^1.3.0":
+"once@npm:^1.3.0, once@npm:^1.4.0":
   version: 1.4.0
   resolution: "once@npm:1.4.0"
   dependencies:
@@ -3409,6 +3455,15 @@ __metadata:
   version: 2.3.0
   resolution: "punycode@npm:2.3.0"
   checksum: 39f760e09a2a3bbfe8f5287cf733ecdad69d6af2fe6f97ca95f24b8921858b91e9ea3c9eeec6e08cede96181b3bb33f95c6ffd8c77e63986508aa2e8159fa200
+  languageName: node
+  linkType: hard
+
+"qs@npm:^6.11.0":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
   languageName: node
   linkType: hard
 

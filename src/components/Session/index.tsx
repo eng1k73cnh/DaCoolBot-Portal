@@ -6,22 +6,31 @@ import LoadingIcon from "../LoadingIcon";
 import Filter from "../Filter";
 import { editMessage, sendMessage } from "@/utils/utils";
 
+export type FilterState = {
+  channel: string;
+  message: string;
+  ping: string;
+  files: File[];
+  fileSize: number;
+};
+
 const Session = (props: { theme: "dark" | "light" }) => {
   const { data: user, status } = useSession();
 
-  const [currentChannel, setCurrentChannel] = useState<string>("");
-  const [currentMsg, setCurrentMsg] = useState<string>("");
-
-  const [pingContent, setPingContent] = useState<string>(
-    `@everyone DaCoolReminder is updated for ${new Date(
+  const [filterState, setFilterState] = useState<FilterState>({
+    channel: "",
+    message: "",
+    ping: `@everyone DaCoolReminder is updated for ${new Date(
       Date.now() + new Date().getTimezoneOffset() * 60000 + 7 * 3600 * 1000
     ).toLocaleString("en-US", {
       weekday: "long",
       month: "long",
       day: "numeric",
       year: "numeric",
-    })}`
-  );
+    })}`,
+    files: [],
+    fileSize: 0,
+  });
 
   const [editorValue, setEditorValue] = useState<string | undefined>("");
 
@@ -34,9 +43,27 @@ const Session = (props: { theme: "dark" | "light" }) => {
   }
 
   const postMessage = () => {
-    if (currentMsg === "new") {
+    if (filterState.fileSize > 8388608) {
+      toast.error("File size limit exceeded");
+      return;
+    }
+
+    const form = new FormData();
+    const json = {
+      content: editorValue || "",
+      attachments: filterState.files.map((file, index) => {
+        return { id: index, filename: file.name };
+      }),
+    };
+    form.append("payload_json", JSON.stringify(json));
+
+    filterState.files.forEach((file, index) => {
+      form.append(`files[${index}]`, file, file.name);
+    });
+
+    if (filterState.message === "new") {
       toast("Sending message...");
-      sendMessage(currentChannel, editorValue || "")
+      sendMessage(form, filterState.channel)
         .then((data) => {
           console.log(data);
           toast.success("Message sent successfully!");
@@ -47,7 +74,7 @@ const Session = (props: { theme: "dark" | "light" }) => {
         });
     } else {
       toast("Editing message...");
-      editMessage(currentChannel, currentMsg, editorValue || "")
+      editMessage(form, filterState.channel, filterState.message)
         .then((data) => {
           console.log(data);
           toast.success("Message edited successfully!");
@@ -58,8 +85,16 @@ const Session = (props: { theme: "dark" | "light" }) => {
         });
     }
 
-    if (pingContent) {
-      sendMessage(currentChannel, pingContent)
+    if (filterState.ping) {
+      const form = new FormData();
+      form.append("channelId", filterState.channel);
+      form.append(
+        "payload_json",
+        JSON.stringify({ content: filterState.ping })
+      );
+
+      toast("Sending ping...");
+      sendMessage(form, filterState.channel)
         .then((data) => {
           console.log(data);
           toast.success("Ping sent successfully!");
@@ -72,21 +107,17 @@ const Session = (props: { theme: "dark" | "light" }) => {
   };
 
   return (
-    <div className="hero md:min-h-[80vh] min-h-[75vh]">
+    <div className="hero min-h-[75vh]">
       <div className="hero-content flex-col lg:flex-row">
         <Filter
-          currentChannel={currentChannel}
-          currentMessage={currentMsg}
-          pingContent={pingContent}
-          setChannel={setCurrentChannel.bind(this)}
-          setMessage={setCurrentMsg.bind(this)}
-          setPingContent={setPingContent.bind(this)}
+          state={filterState}
+          setState={setFilterState}
           callback={postMessage}
         />
-        {currentMsg && (
+        {filterState.message && (
           <Editor
-            channelId={currentChannel}
-            messageId={currentMsg}
+            channelId={filterState.channel}
+            messageId={filterState.message}
             callback={setEditorValue}
             theme={props.theme}
           />

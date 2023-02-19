@@ -8,17 +8,23 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
+  if (req.method !== "GET") {
     res.status(405).json({ error: "Method not allowed" });
     return;
   }
+
+  if (!req.query.channelId || typeof req.query.channelId !== "string") {
+    res.status(400).json({ error: "Bad request" });
+    return;
+  }
+
   const rest = new REST({ version: "10" }).setToken(process.env.TOKEN!);
   const session = await getServerSession(req, res, authOptions);
 
   try {
     if (session) {
       const fetchMessages = await rest.get(
-        Routes.channelMessages(JSON.parse(req.body).channelId)
+        Routes.channelMessages(req.query.channelId)
       );
       res.status(200).json(fetchMessages);
     } else {
