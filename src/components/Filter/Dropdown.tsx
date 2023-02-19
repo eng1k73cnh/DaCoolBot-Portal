@@ -1,8 +1,8 @@
-const Dropdown = (props: {
+export default function Dropdown(props: {
   type: string;
   items: ({ key: string; value: string } | undefined)[];
   callback: (channel: string) => void;
-}) => {
+}) {
   return (
     <div className="form-control w-full">
       <label className="label">
@@ -11,7 +11,9 @@ const Dropdown = (props: {
       <select
         title={props.type}
         className="select select-bordered w-80 bg-gray-100 dark:bg-slate-800"
-        onChange={(e) => props.callback(e.target.value)}
+        onChange={(e) => {
+          props.callback(e.target.value);
+        }}
       >
         <option value="">Select a {props.type.toLowerCase()}</option>
         {props.type === "Message" && (
@@ -31,6 +33,4 @@ const Dropdown = (props: {
       </select>
     </div>
   );
-};
-
-export default Dropdown;
+}

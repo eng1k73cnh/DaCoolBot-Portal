@@ -9,7 +9,10 @@ import { editMessage, sendMessage } from "@/utils/utils";
 export type FilterState = {
   channel: string;
   message: string;
-  ping: string;
+  ping: {
+    enabled: boolean;
+    content: string;
+  };
   files: File[];
   fileSize: number;
 };
@@ -20,14 +23,17 @@ const Session = (props: { theme: "dark" | "light" }) => {
   const [filterState, setFilterState] = useState<FilterState>({
     channel: "",
     message: "",
-    ping: `@everyone DaCoolReminder is updated for ${new Date(
-      Date.now() + new Date().getTimezoneOffset() * 60000 + 7 * 3600 * 1000
-    ).toLocaleString("en-US", {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    })}`,
+    ping: {
+      enabled: true,
+      content: `@everyone DaCoolReminder is updated for ${new Date(
+        Date.now() + new Date().getTimezoneOffset() * 60000 + 7 * 3600 * 1000
+      ).toLocaleString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })}`,
+    },
     files: [],
     fileSize: 0,
   });
@@ -85,12 +91,12 @@ const Session = (props: { theme: "dark" | "light" }) => {
         });
     }
 
-    if (filterState.ping) {
+    if (filterState.ping.enabled && filterState.ping.content) {
       const form = new FormData();
       form.append("channelId", filterState.channel);
       form.append(
         "payload_json",
-        JSON.stringify({ content: filterState.ping })
+        JSON.stringify({ content: filterState.ping.content })
       );
 
       toast("Sending ping...");
@@ -115,12 +121,15 @@ const Session = (props: { theme: "dark" | "light" }) => {
           callback={postMessage}
         />
         {filterState.message && (
-          <Editor
-            channelId={filterState.channel}
-            messageId={filterState.message}
-            callback={setEditorValue}
-            theme={props.theme}
-          />
+          <>
+            <div className="divider md:divider-horizontal" />
+            <Editor
+              channelId={filterState.channel}
+              messageId={filterState.message}
+              callback={setEditorValue}
+              theme={props.theme}
+            />
+          </>
         )}
       </div>
     </div>

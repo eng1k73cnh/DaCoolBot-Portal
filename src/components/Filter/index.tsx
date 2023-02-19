@@ -5,9 +5,12 @@ import {
   RESTGetAPIChannelMessagesResult,
   RESTGetAPIGuildChannelsResult,
 } from "discord-api-types/v10";
-import Dropdown from "../Dropdown";
 import toast from "react-hot-toast";
 import { FilterState } from "../Session";
+
+import Dropdown from "./Dropdown";
+import FileInput from "./FileInput";
+import Ping from "./Ping";
 
 const Filter = (props: {
   state: FilterState;
@@ -82,66 +85,8 @@ const Filter = (props: {
       )}
       {props.state.message && (
         <>
-          <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text">Ping (clear to disable)</span>
-            </label>
-            <div className="flex flex-row">
-              <input
-                type="text"
-                title="Ping"
-                className="input input-bordered w-80 bg-gray-100 dark:bg-slate-800"
-                value={props.state.ping}
-                onChange={(e) => {
-                  props.setState({ ...props.state, ping: e.target.value });
-                }}
-              />
-            </div>
-          </div>
-          <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text">Files</span>
-              <span className="label-text-alt">Max 8MB</span>
-            </label>
-            <div className="flex flex-row">
-              <input
-                type="file"
-                title="Files"
-                className="file-input file-input-bordered file-input-info file-input-md w-80 bg-gray-100 dark:bg-slate-800"
-                multiple
-                onChange={(e) => {
-                  if (e.target.files) {
-                    const fileSize = Array.from(e.target.files).reduce(
-                      (acc, file) => acc + file.size,
-                      0
-                    );
-                    props.setState({
-                      ...props.state,
-                      files: Array.from(e.target.files),
-                      fileSize,
-                    });
-                    e.target.classList.toggle(
-                      "file-input-success",
-                      !!e.target.files[0] && fileSize <= 8000000
-                    );
-                    e.target.classList.toggle(
-                      "file-input-error",
-                      !!e.target.files[0] && fileSize > 8000000
-                    );
-                  }
-                }}
-              />
-            </div>
-            <label className="label">
-              <span className="label-text-alt">
-                {props.state.fileSize
-                  ? `Current size: ${(props.state.fileSize / 1000000).toFixed(
-                      2
-                    )}MB`
-                  : "No files"}
-              </span>
-            </label>
-          </div>
+          <Ping state={props.state} setState={props.setState} />
+          <FileInput state={props.state} setState={props.setState} />
           <button className="btn btn-primary mt-4" onClick={props.callback}>
             <span>Post message</span>
           </button>
