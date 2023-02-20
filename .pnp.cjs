@@ -87,7 +87,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["discord-api-types", "npm:0.37.33"],\
             ["file-type", "npm:18.2.0"],\
             ["tslib", "npm:2.5.0"],\
-            ["undici", "npm:5.18.0"]\
+            ["undici", "npm:5.20.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5092,10 +5092,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["undici", [\
-        ["npm:5.18.0", {\
-          "packageLocation": "./.yarn/cache/undici-npm-5.18.0-4aed233374-74e0f357c3.zip/node_modules/undici/",\
+        ["npm:5.20.0", {\
+          "packageLocation": "./.yarn/cache/undici-npm-5.20.0-e0d42e5e9b-25412a785b.zip/node_modules/undici/",\
           "packageDependencies": [\
-            ["undici", "npm:5.18.0"],\
+            ["undici", "npm:5.20.0"],\
             ["busboy", "npm:1.6.0"]\
           ],\
           "linkType": "HARD"\
