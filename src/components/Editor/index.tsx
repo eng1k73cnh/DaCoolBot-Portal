@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MDEditor from "@monaco-editor/react";
-import LoadingIcon from "../LoadingIcon";
+import { LoadingIcon } from "../LoadingIcon";
 import toast from "react-hot-toast";
 
 const Editor = (props: {
@@ -49,7 +49,7 @@ const Editor = (props: {
   if (!loaded) return <LoadingIcon />;
 
   return (
-    <div className="flex flex-col pt-4 items-center place-content-center justify-center lg:min-w-[50vw] min-w-[75vw] lg:min-h-[50vh] min-h-[70vh] lg:p-10">
+    <div className="flex flex-col p-4 items-center place-content-center justify-center lg:min-w-[50vw] min-w-[75vw] min-h-[75vh] lg:min-h-[70vh] max-sm:w-full">
       <MDEditor
         className="lg:min-w-[50vw] min-w-[75vw] lg:min-h-[70vh] min-h-[75vh]"
         language="markdown"

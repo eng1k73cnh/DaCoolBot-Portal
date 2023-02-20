@@ -1,12 +1,16 @@
+import { InlineLoadingIcon } from "../LoadingIcon";
+
 export default function Dropdown(props: {
   type: string;
   items: ({ key: string; value: string } | undefined)[];
+  fetched: boolean;
   callback: (channel: string) => void;
 }) {
   return (
     <div className="form-control w-full">
       <label className="label">
         <span className="label-text">{props.type}</span>
+        {!props.fetched && <InlineLoadingIcon />}
       </label>
       <select
         title={props.type}

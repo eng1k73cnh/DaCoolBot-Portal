@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Editor from "../Editor";
 import toast from "react-hot-toast";
-import LoadingIcon from "../LoadingIcon";
+import { LoadingIcon } from "../LoadingIcon";
 import Filter from "../Filter";
 import { editMessage, sendMessage } from "@/utils/utils";
 
@@ -38,6 +38,7 @@ const Session = (props: { theme: "dark" | "light" }) => {
     fileSize: 0,
   });
 
+  const [sent, setSent] = useState<boolean>(true);
   const [editorValue, setEditorValue] = useState<string | undefined>("");
 
   if (status === "loading") {
@@ -53,6 +54,8 @@ const Session = (props: { theme: "dark" | "light" }) => {
       toast.error("File size limit exceeded");
       return;
     }
+
+    setSent(false);
 
     const form = new FormData();
     const json = {
@@ -77,6 +80,9 @@ const Session = (props: { theme: "dark" | "light" }) => {
         .catch((err) => {
           console.error(err);
           toast.error("Failed to send message");
+        })
+        .finally(() => {
+          setSent(true);
         });
     } else {
       toast("Editing message...");
@@ -88,6 +94,9 @@ const Session = (props: { theme: "dark" | "light" }) => {
         .catch((err) => {
           console.error(err);
           toast.error("Failed to edit message");
+        })
+        .finally(() => {
+          setSent(true);
         });
     }
 
@@ -119,6 +128,7 @@ const Session = (props: { theme: "dark" | "light" }) => {
           state={filterState}
           setState={setFilterState}
           callback={postMessage}
+          messageSent={sent}
         />
         {filterState.message && (
           <>

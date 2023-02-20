@@ -15,12 +15,18 @@ import Ping from "./Ping";
 const Filter = (props: {
   state: FilterState;
   setState: (state: FilterState) => void;
+  messageSent: boolean;
   callback: () => void;
 }) => {
   const { data: user, status } = useSession();
 
   const [channels, setChannels] = useState<RESTGetAPIGuildChannelsResult>([]);
   const [msgList, setMsgList] = useState<RESTGetAPIChannelMessagesResult>([]);
+
+  const [fetchState, setFetchState] = useState({
+    channels: false,
+    messages: false,
+  });
 
   const botID = "947808159983108137";
 
@@ -38,6 +44,9 @@ const Filter = (props: {
       .catch((err) => {
         console.error(err);
         toast.error("Failed to fetch message list");
+      })
+      .finally(() => {
+        setFetchState({ channels: true, messages: false });
       });
   }, [status, user]);
 
@@ -55,11 +64,14 @@ const Filter = (props: {
       .catch((err) => {
         console.error(err);
         toast.error("Failed to fetch message list");
+      })
+      .finally(() => {
+        setFetchState({ channels: true, messages: true });
       });
   }, [status, user, props.state.channel]);
 
   return (
-    <div className="flex flex-col pt-4 items-center place-content-center justify-center min-w-fit min-h-full lg:p-10">
+    <div className="flex flex-col p-4 items-center place-content-center justify-center min-w-fit min-h-full">
       <Dropdown
         type="Channel"
         items={channels.map((channel) => {
@@ -67,6 +79,7 @@ const Filter = (props: {
             return { key: channel.id, value: "#-" + channel.name };
           }
         })}
+        fetched={fetchState.channels}
         callback={(channel: string) => {
           props.setState({ ...props.state, channel: channel, message: "" });
         }}
@@ -78,6 +91,7 @@ const Filter = (props: {
             if (msg.author.id === botID)
               return { key: msg.id, value: msg.content.split("\n")[0] };
           })}
+          fetched={fetchState.messages}
           callback={(msg: string) => {
             props.setState({ ...props.state, message: msg });
           }}
@@ -87,8 +101,13 @@ const Filter = (props: {
         <>
           <Ping state={props.state} setState={props.setState} />
           <FileInput state={props.state} setState={props.setState} />
-          <button className="btn btn-primary mt-4" onClick={props.callback}>
-            <span>Post message</span>
+          <button
+            className={
+              "btn btn-primary mt-4" + (!props.messageSent ? " loading" : "")
+            }
+            onClick={props.callback}
+          >
+            <span>{props.messageSent ? "Post message" : "Posting..."}</span>
           </button>
         </>
       )}
