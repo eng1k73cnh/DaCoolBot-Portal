@@ -71,7 +71,7 @@ const Filter = (props: {
   }, [status, user, props.state.channel]);
 
   return (
-    <div className="flex flex-col p-4 items-center place-content-center justify-center min-w-fit min-h-full">
+    <div className="flex flex-col max-sm:pt-4 max-sm:pb-4 md:pr-4 md:pl-4 items-center place-content-center justify-center min-w-fit min-h-full">
       <Dropdown
         type="Channel"
         items={channels.map((channel) => {

@@ -49,7 +49,7 @@ const Editor = (props: {
   if (!loaded) return <LoadingIcon />;
 
   return (
-    <div className="flex flex-col p-4 items-center place-content-center justify-center lg:min-w-[50vw] min-w-[75vw] min-h-[75vh] lg:min-h-[70vh] max-sm:w-full">
+    <div className="flex flex-col max-sm:pt-4 max-sm:pb-4 md:pr-4 md:pl-4 items-center place-content-center justify-center lg:min-w-[50vw] min-w-[75vw] min-h-[75vh] lg:min-h-[70vh] max-sm:w-full">
       <MDEditor
         className="lg:min-w-[50vw] min-w-[75vw] lg:min-h-[70vh] min-h-[75vh]"
         language="markdown"
