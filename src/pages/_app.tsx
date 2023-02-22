@@ -20,7 +20,6 @@ export default function App({
         <meta content="dacoolbot.kyrie25.me" name="twitter:site" />
         <meta content="DaCoolBot Portal" name="twitter:title" />
         <meta content="Web portal for DaCoolBot" name="twitter:description" />
-        <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           sizes="180x180"

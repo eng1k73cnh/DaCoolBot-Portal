@@ -8,7 +8,7 @@ export default function FileInput(props: {
     <div className="form-control w-full">
       <label className="label">
         <span className="label-text">Files</span>
-        <span className="label-text-alt">Max 8MB</span>
+        <span className="label-text-alt">Max 4.5MB</span>
       </label>
       <div className="flex flex-row">
         <input
@@ -29,11 +29,11 @@ export default function FileInput(props: {
               });
               e.target.classList.toggle(
                 "file-input-success",
-                !!e.target.files[0] && fileSize <= 8000000
+                !!e.target.files[0] && fileSize <= 4.5 * 1024 * 1024
               );
               e.target.classList.toggle(
                 "file-input-error",
-                !!e.target.files[0] && fileSize > 8000000
+                !!e.target.files[0] && fileSize > 4.5 * 1024 * 1024
               );
             }
           }}

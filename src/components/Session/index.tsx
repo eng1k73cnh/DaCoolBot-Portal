@@ -50,7 +50,7 @@ const Session = (props: { theme: "dark" | "light" }) => {
   }
 
   const postMessage = () => {
-    if (filterState.fileSize > 8388608) {
+    if (filterState.fileSize > 4.5 * 1024 * 1024) {
       toast.error("File size limit exceeded");
       return;
     }
