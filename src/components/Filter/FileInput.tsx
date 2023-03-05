@@ -1,4 +1,4 @@
-import { FilterState } from "../Session";
+import { FilterState } from "@/pages";
 
 export default function FileInput(props: {
   state: FilterState;

@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState, memo } from "react";
 import MDEditor from "@monaco-editor/react";
 import { LoadingIcon } from "../LoadingIcon";
 import toast from "react-hot-toast";
+import { ThemeContext } from "@/pages/_app";
 
-const Editor = (props: {
+const Editor = memo(function Editor(props: {
   channelId: string;
   messageId: string;
   callback: (content: string | undefined) => void;
-  theme: "dark" | "light";
-}) => {
+}) {
   const [value, setValue] = useState<string | undefined>("");
   const [loaded, setLoaded] = useState<boolean>(false);
+  const theme = useContext(ThemeContext);
 
   const setEditorValue = (content: string | undefined) => {
     setValue(content);
@@ -55,10 +56,10 @@ const Editor = (props: {
         language="markdown"
         value={value}
         onChange={setEditorValue}
-        theme={props.theme === "dark" ? "vs-dark" : "vs-light"}
+        theme={`vs-${theme}`}
       />
     </div>
   );
-};
+});
 
 export default Editor;

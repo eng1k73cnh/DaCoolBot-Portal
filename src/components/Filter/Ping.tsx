@@ -1,5 +1,3 @@
-import { FilterState } from "../Session";
-
 export default function Ping(props: {
   state: FilterState;
   setState: (state: FilterState) => void;

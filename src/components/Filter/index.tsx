@@ -6,7 +6,6 @@ import {
   RESTGetAPIGuildChannelsResult,
 } from "discord-api-types/v10";
 import toast from "react-hot-toast";
-import { FilterState } from "../Session";
 
 import Dropdown from "./Dropdown";
 import FileInput from "./FileInput";

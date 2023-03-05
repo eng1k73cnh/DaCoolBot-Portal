@@ -1,26 +1,140 @@
-import Head from "next/head";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Session from "@/components/Session";
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
-export default function Home() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+import Editor from "@/components/Editor";
+import { LoadingIcon } from "@/components/LoadingIcon";
+import Filter from "@/components/Filter";
+import { editMessage, sendMessage } from "@/utils/utils";
+
+const Home = () => {
+  const { data: user, status } = useSession();
+
+  const [filterState, setFilterState] = useState<FilterState>({
+    channel: "",
+    message: "",
+    ping: {
+      enabled: true,
+      content: `@everyone DaCoolReminder is updated for ${new Date(
+        Date.now() + new Date().getTimezoneOffset() * 60000 + 7 * 3600 * 1000
+      ).toLocaleString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })}`,
+    },
+    files: [],
+    fileSize: 0,
+  });
+
+  const [sent, setSent] = useState<boolean>(true);
+  const [editorValue, setEditorValue] = useState<string | undefined>("");
+
+  if (status === "loading") {
+    return <LoadingIcon />;
+  }
+
+  if (!user) {
+    return <div>Not signed in</div>;
+  }
+
+  const postMessage = () => {
+    if (filterState.fileSize > 4.5 * 1024 * 1024) {
+      toast.error("File size limit exceeded");
+      return;
+    }
+
+    setSent(false);
+
+    const form = new FormData();
+    const json = {
+      content: editorValue || "",
+      attachments: filterState.files.map((file, index) => {
+        return { id: index, filename: file.name };
+      }),
+    };
+    form.append("payload_json", JSON.stringify(json));
+
+    filterState.files.forEach((file, index) => {
+      form.append(`files[${index}]`, file, file.name);
+    });
+
+    if (filterState.message === "new") {
+      toast("Sending message...");
+      sendMessage(form, filterState.channel)
+        .then((data) => {
+          console.log(data);
+          toast.success("Message sent successfully!");
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Failed to send message");
+        })
+        .finally(() => {
+          setSent(true);
+        });
+    } else {
+      toast("Editing message...");
+      editMessage(form, filterState.channel, filterState.message)
+        .then((data) => {
+          console.log(data);
+          toast.success("Message edited successfully!");
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Failed to edit message");
+        })
+        .finally(() => {
+          setSent(true);
+        });
+    }
+
+    if (filterState.ping.enabled && filterState.ping.content) {
+      const form = new FormData();
+      form.append("channelId", filterState.channel);
+      form.append(
+        "payload_json",
+        JSON.stringify({ content: filterState.ping.content })
+      );
+
+      toast("Sending ping...");
+      sendMessage(form, filterState.channel)
+        .then((data) => {
+          console.log(data);
+          toast.success("Ping sent successfully!");
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Failed to send ping");
+        });
+    }
+  };
+
   return (
     <>
-      <Head>
-        <meta
-          name="theme-color"
-          content={theme === "dark" ? "#334155" : "#ffffff"}
-        />
-      </Head>
-      <main className="flex flex-col justify-between h-screen items-center relative">
-        <Toaster />
-        <Header setTheme={setTheme} />
-        <Session theme={theme} />
-        <Footer />
-      </main>
+      <div className="hero">
+        <div className="hero-content flex-col lg:flex-row">
+          <Filter
+            state={filterState}
+            setState={setFilterState}
+            callback={postMessage}
+            messageSent={sent}
+          />
+          {filterState.message && (
+            <>
+              <div className="divider md:divider-horizontal" />
+              <Editor
+                channelId={filterState.channel}
+                messageId={filterState.message}
+                callback={setEditorValue}
+              />
+            </>
+          )}
+        </div>
+      </div>
     </>
   );
-}
+};
+
+export default Home;
