@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState, memo } from "react";
 import MDEditor from "@monaco-editor/react";
 import { LoadingIcon } from "../LoadingIcon";
-import toast from "react-hot-toast";
 import { ThemeContext } from "@/pages/_app";
+import { fetchData } from "@/utils";
 
 const Editor = memo(function Editor(props: {
   channelId: string;
@@ -28,21 +28,15 @@ const Editor = memo(function Editor(props: {
     }
 
     setLoaded(false);
-    fetch(
+
+    fetchData(
       `/api/message/fetch?channelId=${props.channelId}&messageId=${props.messageId}`
     )
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(res);
-      })
       .then((data) => {
         props.callback(data.content);
         setValue(data.content);
-        setLoaded(true);
       })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to fetch message content");
+      .finally(() => {
         setLoaded(true);
       });
   }, [props.channelId, props.messageId]);

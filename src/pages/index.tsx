@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import Editor from "@/components/Editor";
 import { LoadingIcon } from "@/components/LoadingIcon";
 import Filter from "@/components/Filter";
-import { editMessage, sendMessage } from "@/utils/utils";
+import { editMessage, sendMessage } from "@/utils";
 
 const Home = () => {
   const { data: user, status } = useSession();
@@ -62,32 +62,16 @@ const Home = () => {
 
     if (filterState.message === "new") {
       toast("Sending message...");
-      sendMessage(form, filterState.channel)
-        .then((data) => {
-          console.log(data);
-          toast.success("Message sent successfully!");
-        })
-        .catch((err) => {
-          console.error(err);
-          toast.error("Failed to send message");
-        })
-        .finally(() => {
-          setSent(true);
-        });
+      sendMessage(form, filterState.channel).finally(() => {
+        setSent(true);
+      });
     } else {
       toast("Editing message...");
-      editMessage(form, filterState.channel, filterState.message)
-        .then((data) => {
-          console.log(data);
-          toast.success("Message edited successfully!");
-        })
-        .catch((err) => {
-          console.error(err);
-          toast.error("Failed to edit message");
-        })
-        .finally(() => {
+      editMessage(form, filterState.channel, filterState.message).finally(
+        () => {
           setSent(true);
-        });
+        }
+      );
     }
 
     if (filterState.ping.enabled && filterState.ping.content) {
@@ -99,15 +83,7 @@ const Home = () => {
       );
 
       toast("Sending ping...");
-      sendMessage(form, filterState.channel)
-        .then((data) => {
-          console.log(data);
-          toast.success("Ping sent successfully!");
-        })
-        .catch((err) => {
-          console.error(err);
-          toast.error("Failed to send ping");
-        });
+      sendMessage(form, filterState.channel);
     }
   };
 

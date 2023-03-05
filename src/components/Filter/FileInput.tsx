@@ -1,5 +1,3 @@
-import { FilterState } from "@/pages";
-
 export default function FileInput(props: {
   state: FilterState;
   setState: (state: FilterState) => void;

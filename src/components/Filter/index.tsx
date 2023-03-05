@@ -5,11 +5,11 @@ import {
   RESTGetAPIChannelMessagesResult,
   RESTGetAPIGuildChannelsResult,
 } from "discord-api-types/v10";
-import toast from "react-hot-toast";
 
 import Dropdown from "./Dropdown";
 import FileInput from "./FileInput";
 import Ping from "./Ping";
+import { fetchData } from "@/utils";
 
 const Filter = (props: {
   state: FilterState;
@@ -32,41 +32,23 @@ const Filter = (props: {
   useEffect(() => {
     if (status === "loading" || !user) return;
 
-    fetch("/api/channel/list")
-      .then((res) => {
-        if (res.ok) return res.json();
-        else return Promise.reject(res);
-      })
+    fetchData("/api/channel/list")
       .then((data) => {
         setChannels(data);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to fetch message list");
       })
       .finally(() => {
         setFetchState({ channels: true, messages: false });
       });
-  }, [status, user]);
 
-  useEffect(() => {
-    if (status === "loading" || !user || props.state.channel === "") return;
-
-    fetch(`/api/channel/messages?channelId=${props.state.channel}`)
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(res);
-      })
-      .then((data) => {
-        setMsgList(data);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to fetch message list");
-      })
-      .finally(() => {
-        setFetchState({ channels: true, messages: true });
-      });
+    if (props.state.channel !== "") {
+      fetchData(`/api/channel/messages?channelId=${props.state.channel}`)
+        .then((data) => {
+          setMsgList(data);
+        })
+        .finally(() => {
+          setFetchState({ channels: true, messages: true });
+        });
+    }
   }, [status, user, props.state.channel]);
 
   return (

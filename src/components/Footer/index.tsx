@@ -12,6 +12,8 @@ const Footer = () => {
             process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA
           }
           className="hover:text-blue-500 transition-colors text-xs"
+          rel="noreferrer noopener"
+          target="_blank"
         >
           {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7)}
         </a>
